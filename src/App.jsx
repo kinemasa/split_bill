@@ -1,4 +1,3 @@
-
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "./App.css";
 
@@ -10,18 +9,24 @@ import Navbar from "./Components/Navbar";
 import { useState } from "react";
 
 function App() {
-  const [isAuth, setIsAuth] = useState(false);
+  const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
   return (
     <>
       <Router>
-      <Navbar isAuth ={isAuth}/>
-      <Routes>
-        <Route path="/split_bill/" element={<Home />}></Route>
-        <Route path="/split_bill/createpost" element={<CreatePost />}></Route>
-        <Route path="/split_bill/login" element={<Login setIsAuth={setIsAuth}/>}></Route>
-        <Route path="/split_bill/logout" element={<Logout />}></Route>
-      </Routes>
-    </Router>
+        <Navbar isAuth={isAuth} />
+        <Routes>
+          <Route path="/split_bill/" element={<Home />}></Route>
+          <Route path="/split_bill/createpost" element={<CreatePost />}></Route>
+          <Route
+            path="/split_bill/login"
+            element={<Login setIsAuth={setIsAuth} />}
+          ></Route>
+          <Route
+            path="/split_bill/logout"
+            element={<Logout setIsAuth={setIsAuth} />}
+          ></Route>
+        </Routes>
+      </Router>
     </>
   );
 }
